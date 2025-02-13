@@ -1,0 +1,102 @@
+/* style.css - Catppuccin Latte theme with monospaced font */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+
+:root {
+    --background: #eff1f5; /* Latte background */
+    --surface: #e6e9ef; /* Container background */
+    --text: #575268; /* Primary text */
+    --accent: #ea76cb; /* Accent color (pink) */
+    --highlight: #df8e1d; /* Highlight color (yellow) */
+    --muted: #6c7086; /* Muted text */
+    --border: #c4c4c4; /* Border color */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: "JetBrains Mono", monospace;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--highlight);
+    margin-bottom: 20px;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--highlight);
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+pre {
+    background-color: var(--background);
+    padding: 15px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--accent);
+    color: var(--background);
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--highlight);
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--muted);
+}
