@@ -1,3 +1,4 @@
+<?php
 function initDatabase() {
     $db = new SQLite3('gitplace.db');
 
