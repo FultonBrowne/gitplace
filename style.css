@@ -6,6 +6,7 @@
     --text: #212529; /* Dark grey text */
     --white-text: #ffffff; /* White text */
     --accent: #007bff; /* Primary blue accent */
+    --light-accent: #66b2ff; /* Lighter blue accent */
     --muted: #6c757d; /* Muted grey text */
     --border: #dee2e6; /* Light grey borders */
 }
@@ -128,26 +129,53 @@ nav a {
     font-weight: 500;
 }
 
+nav button {
+    margin-left: 20px;
+    font-weight: 500;
+}
+
 nav a:hover {
     color: var(--accent);
 }
 
 .btn-primary {
-    background-color: var(--accent);
-    color: var(--white-text);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition: all 0.3s ease; /* transition-colors */
+    outline: none; /* focus-visible:outline-hidden */
+    ring-offset-color: white; /* ring-offset-white */
+    box-shadow: 0 0 0 2px var(--accent); /* focus-visible:ring-2 focus-visible:ring-slate-950 */
+    ring-offset-width: 2px; /* focus-visible:ring-offset-2 */
+    background: linear-gradient(to top, var(--accent), var(--light-accent)); /* bg-linear-to-t from-blue-600 to-blue-500 */
 
+    ); /* bg-linear-to-t from-blue-600 to-blue-500 */
+    border: 1px solid #007bff; /* border border-blue-600 */
+    color: white; /* text-white */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    height: 1.75rem; /* h-7 */
+    letter-spacing: 0.05em; /* tracking-wide */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
 .btn-primary:hover {
-    background-color: darken(var(--accent), 90%);
-    color: var(--accent);
+    transform: scale(1.01);
+    opacity: 0.9;
+}
+.btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 2px var(--accent),
+        0 0 0 4px white; /* focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 */
 }
 
+.btn-primary:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
 .section {
     padding: 60px 0;
     border-bottom: 1px solid var(--border);

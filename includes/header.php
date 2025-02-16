@@ -18,7 +18,11 @@
                     <button class="btn-primary" type="submit">Logout</button>
                 </form>
             <?php else: ?>
-                <a href="login.php">Login</a>
-                <a href="register.php">Register</a>
+                <nav class="main-nav">
+                    <a href="login.php">Login</a>
+                    <form action="register.php" method="get">
+                        <button class="btn-primary" type="submit">Register</button>
+                    </form>
+                </nav>
             <?php endif; ?>
 </header>
