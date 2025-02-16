@@ -1,7 +1,6 @@
 <?php
 require_once 'includes/auth.php';
 require_once 'includes/database.php';
-require_once 'includes/repository.php';
 
 // Initialize database if needed
 initDatabase();
@@ -11,7 +10,7 @@ if (isset($_POST['action'])) {
     switch ($_POST['action']) {
         case 'login':
             if (login($_POST['username'], $_POST['password'])) {
-                header('Location: index.php');
+                header('Location: dashboard.php');
                 exit;
             }
             $error = "Invalid login credentials";
@@ -19,7 +18,7 @@ if (isset($_POST['action'])) {
 
         case 'register':
             if (register($_POST['username'], $_POST['password'])) {
-                header('Location: index.php?msg=registered');
+                header('Location: dashboard.php?msg=registered');
                 exit;
             }
             $error = "Registration failed";
@@ -27,7 +26,7 @@ if (isset($_POST['action'])) {
 
         case 'logout':
             logout();
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
     }
 }
@@ -69,54 +68,7 @@ if (isset($_POST['action'])) {
             </div>
         </div>
     <?php else: ?>
-        <div class="repository-list">
-            <h1>Your Repositories</h1>
-            <?php
-            $userRepos = listUserRepositories($_SESSION['user_id']);
-            if (empty($userRepos)): ?>
-                <p>You don't have any repositories yet.</p>
-            <?php else: ?>
-                <ul>
-                    <?php foreach ($userRepos as $repo): ?>
-                        <li>
-                            <a href="files.php?repo=<?php echo urlencode($repo['name']); ?>">
-                                <?php echo htmlspecialchars($repo['name']); ?>
-                            </a>
-                            <?php if ($repo['description']): ?>
-                                <p class="repo-description">
-                                    <?php echo htmlspecialchars($repo['description']); ?>
-                                </p>
-                            <?php endif; ?>
-                            <span class="repo-visibility">
-                                <?php echo $repo['is_public'] ? 'Public' : 'Private'; ?>
-                            </span>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
-            <h1>Public Repositories</h1>
-            <?php
-            $publicRepos = listPublicRepositories();
-            if (empty($publicRepos)): ?>
-                <p>No public repositories available.</p>
-            <?php else: ?>
-                <ul>
-                    <?php foreach ($publicRepos as $repo): ?>
-                        <li>
-                            <a href="files.php?user=<?php echo urlencode($repo['username']); ?>&repo=<?php echo urlencode($repo['name']); ?>">
-                                <?php echo htmlspecialchars($repo['username'] . '/' . $repo['name']); ?>
-                            </a>
-                            <?php if ($repo['description']): ?>
-                                <p class="repo-description">
-                                    <?php echo htmlspecialchars($repo['description']); ?>
-                                </p>
-                            <?php endif; ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-        </div>
+        <p>You are already logged in. Go to your <a href="dashboard.php">dashboard</a>.</p>
     <?php endif; ?>
 </body>
 </html>

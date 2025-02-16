@@ -8,7 +8,7 @@ requireLogin();
 $repo = $_GET['repo'] ?? null;
 
 if (!$repo) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exec('rm -rf ' . escapeshellarg($repoPath));
                     }
 
-                    header('Location: index.php?msg=repo_deleted');
+                    header('Location: dashboard.php?msg=repo_deleted');
                     exit;
                 } else {
                     $error = "Failed to delete repository.";

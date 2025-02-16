@@ -73,7 +73,7 @@ function logout() {
 
 function requireLogin() {
     if (!isLoggedIn()) {
-        header('Location: index.php');
+        header('Location: dashboard.php');
         exit;
     }
 }

@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 :root {
-    --background: #eff1f5; /* Latte background */
-    --surface: #e6e9ef; /* Container background */
-    --text: #575268; /* Primary text */
-    --accent: #ea76cb; /* Accent color (pink) */
-    --highlight: #df8e1d; /* Highlight color (yellow) */
-    --muted: #6c7086; /* Muted text */
-    --border: #c4c4c4; /* Border color */
+    --background: #ffffff; /* White background */
+    --surface: #f8f9fa; /* Light grey for surfaces */
+    --text: #212529; /* Dark grey text */
+    --white-text: #ffffff; /* White text */
+    --accent: #007bff; /* Primary blue accent */
+    --muted: #6c757d; /* Muted grey text */
+    --border: #dee2e6; /* Light grey borders */
 }
 
 * {
@@ -15,51 +15,44 @@
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 20px;
     background-color: var(--background);
     color: var(--text);
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Inter", sans-serif;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 16px;
     max-width: 1200px;
-    margin: 0 auto;
 }
 
 /* File Tree Styles */
-.file-tree {
-    background: var(--surface);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    border: 1px solid var(--border);
-}
-
-.file-tree ul {
-    list-style-type: none;
-    padding-left: 20px;
-}
-
-.file-tree li {
-    margin: 8px 0;
-    padding: 4px 0;
-}
-
-/* Current View Styles */
-.current-view {
-    background: var(--surface);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    border: 1px solid var(--border);
-}
-
-/* File Contents Styles */
+.file-tree,
+.current-view,
 .file-contents {
     background: var(--surface);
     padding: 20px;
     border-radius: 8px;
+    margin: 20px 0;
     border: 1px solid var(--border);
+}
+
+.file-tree ul,
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.file-tree ul {
+    padding-left: 20px;
+}
+
+.file-tree li,
+li {
+    margin-bottom: 10px;
+    padding: 4px 0;
+}
+
+.file-contents {
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -92,15 +85,6 @@ a:hover {
     text-decoration: underline;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 10px;
-}
-
 pre {
     background-color: var(--surface);
     padding: 15px;
@@ -110,15 +94,119 @@ pre {
     font-size: 0.9em;
 }
 
-/* Commit History Styles */
 pre a {
     display: block;
     padding: 4px 0;
     margin: 4px 0;
 }
 
-/* Repository List Styles */
 ul li a {
     display: block;
     padding: 4px 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+.header-spacer {
+    flex-grow: 1;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--white-text);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--accent), 90%);
+    color: var(--accent);
+}
+
+.section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.section h2 {
+    color: var(--text);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.section p {
+    color: var(--muted);
+    font-size: 18px;
+    max-width: 800px;
+}
+
+/* Repository Card Styles */
+.repo-card {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease;
+}
+
+.repo-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.repo-card a {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.repo-card a:hover {
+    color: var(--highlight);
+}
+
+.repo-description {
+    color: var(--muted);
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.repo-visibility {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white-text);
+    background-color: var(--accent);
+}
+
+.repo-visibility.private {
+    background-color: #dc3545; /* Red for private repositories */
 }

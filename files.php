@@ -11,7 +11,7 @@ $commit = $_GET['commit'] ?? null;
 $path = $_GET['path'] ?? '';
 
 if (!$repo) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 
@@ -54,6 +54,7 @@ if (!preg_match('/^[a-f0-9]+$/', $commit)) {
             <a href="files.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>" class="active">Files</a>
             <a href="commits.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Commits</a>
             <a href="issues.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Issues</a>
+            <a href="patches.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Pull Requests</a>
             <?php if ($_SESSION['user_id'] === $repoInfo['user_id']): ?>
                 <a href="settings.php?<?php echo http_build_query(['repo' => $repo]); ?>">Settings</a>
             <?php endif; ?>

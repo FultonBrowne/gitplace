@@ -9,7 +9,7 @@ $repo = $_GET['repo'] ?? null;
 $username = $_GET['user'] ?? $_SESSION['username'];
 
 if (!$repo) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 

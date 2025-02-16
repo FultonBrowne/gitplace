@@ -10,7 +10,7 @@ $username = $_GET['user'] ?? $_SESSION['username'];
 $issueId = $_GET['issue'] ?? null;
 
 if (!$repo) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 

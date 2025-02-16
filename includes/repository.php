@@ -35,7 +35,7 @@ function getRepoPath($username, $repoName) {
     return "/Users/fultonbrowne/code/users/$username/$repoName";
 }
 
-function listUserRepositories($userId) {
+function listUserRepositories($userId, $username) {
     $db = Database::getInstance();
 
     $stmt = $db->prepare('
@@ -51,6 +51,25 @@ function listUserRepositories($userId) {
     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         $repos[] = $row;
     }
+    // check if any repos have been added to the user's directory but not to the database
+    $dir = "/Users/fultonbrowne/code/users/$username";
+    $files = scandir($dir);
+    foreach ($files as $file) {
+        if ($file === '.' || $file === '..') continue;
+        if (!in_array($file, array_column($repos, 'name'))) {
+            // create an empty repository
+            $stmt = $db->prepare('
+                INSERT INTO repositories (name, user_id, is_public)
+                VALUES (:name, :user_id, :is_public)
+            ');
+            $stmt->bindValue(':name', $file, SQLITE3_TEXT);
+            $stmt->bindValue(':user_id', $userId, SQLITE3_INTEGER);
+            $stmt->bindValue(':is_public', false, SQLITE3_INTEGER);
+            $stmt->execute();
+            $repos[] = ['name' => $file, 'user_id' => $userId, 'is_public' => false];
+        }
+    }
+
     return $repos;
 }
 

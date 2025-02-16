@@ -11,7 +11,7 @@ $commit = $_GET['commit'] ?? null;
 $file = $_GET['file'] ?? null;
 
 if (!$repo || !$commit || !$file) {
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 
