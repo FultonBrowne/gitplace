@@ -52,9 +52,9 @@ if (isset($_POST['action'])) {
             if (empty($userRepos)): ?>
                 <p>You don't have any repositories yet.</p>
             <?php else: ?>
-                <ul>
+                <div class="grid-container">
                     <?php foreach ($userRepos as $repo): ?>
-                        <li class="repo-card">
+                        <div class="repo-card">
                             <a href="files.php?repo=<?php echo urlencode($repo['name']); ?>">
                                 <?php echo htmlspecialchars($repo['name']); ?>
                             </a>
@@ -66,9 +66,9 @@ if (isset($_POST['action'])) {
                             <span class="repo-visibility <?php echo $repo['is_public'] ? '' : 'private'; ?>">
                                 <?php echo $repo['is_public'] ? 'Public' : 'Private'; ?>
                             </span>
-                        </li>
+                        </div>
                     <?php endforeach; ?>
-                </ul>
+                </div>
             <?php endif; ?>
 
             <!-- <h1>Public Repositories</h1>

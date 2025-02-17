@@ -1,14 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Judson:wght@400;700&display=swap");
-:root {
-    --background: #ffffff; /* White background */
-    --surface: #f8f9fa; /* Light grey for surfaces */
-    --text: #212529; /* Dark grey text */
-    --white-text: #ffffff; /* White text */
-    --accent: #007bff; /* Primary blue accent */
-    --light-accent: #66b2ff; /* Lighter blue accent */
-    --muted: #6c757d; /* Muted grey text */
-    --border: #dee2e6; /* Light grey borders */
-
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #121212; /* Dark background */
+        --surface: #1e1e1e; /* Darker grey for surfaces */
+        --text: #e0e0e0; /* Light grey text */
+        --white-text: #ffffff; /* White text */
+        --accent: #007bff; /* Primary blue accent */
+        --light-accent: #66b2ff; /* Lighter blue accent */
+        --muted: #9e9e9e; /* Muted grey text */
+        --border: #333333; /* Dark grey borders */
+    }
+}
+@media (prefers-color-scheme: light) {
+    :root {
+        --background: #ffffff; /* White background */
+        --surface: #f8f9fa; /* Light grey for surfaces */
+        --text: #212529; /* Dark grey text */
+        --white-text: #ffffff; /* White text */
+        --accent: #007bff; /* Primary blue accent */
+        --light-accent: #66b2ff; /* Lighter blue accent */
+        --muted: #6c757d; /* Muted grey text */
+        --border: #dee2e6; /* Light grey borders */
+    }
+}
 * {
     box-sizing: border-box;
 }
@@ -70,7 +84,6 @@ h5,
 h6 {
     color: var(--highlight);
     margin-bottom: 20px; /* Increased margin for better spacing */
-
 }
 
 /* h1 {
@@ -139,6 +152,17 @@ nav button {
 
 nav a:hover {
     color: var(--accent);
+}
+
+.reponav {
+    padding: 12px 0; /* Increased padding for better spacing */
+}
+
+.reponav a {
+    color: var(--text);
+    text-decoration: none;
+    margin-right: 16px; /* Increased margin for better spacing */
+    font-weight: 500;
 }
 
 .btn-primary {
@@ -288,7 +312,11 @@ textarea {
     ring-offset-color: white; /* ring-offset-white */
     box-shadow: 0 0 0 2px #dc3545; /* focus-visible:ring-2 focus-visible:ring-slate-950 */
     ring-offset-width: 2px; /* focus-visible:ring-offset-2 */
-    background: linear-gradient(to top, #dc3545, #ff6b6b); /* bg-linear-to-t from-red-600 to-red-500 */
+    background: linear-gradient(
+        to top,
+        #dc3545,
+        #ff6b6b
+    ); /* bg-linear-to-t from-red-600 to-red-500 */
     border: 1px solid #dc3545; /* border border-red-600 */
     color: white; /* text-white */
     padding: 0.5rem 1rem; /* px-4 py-2 */
@@ -341,7 +369,6 @@ tr:nth-child(even) {
     background-color: var(--surface);
 }
 
-
 td {
     color: var(--text);
 }
@@ -352,4 +379,28 @@ caption {
     font-size: 14px;
     color: var(--muted);
     text-align: center;
+}
+
+footer {
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px; /* Adjust the gap between items as needed */
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }

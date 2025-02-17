@@ -21,22 +21,22 @@ initDatabase();
         $publicRepos = listPublicRepositories();
         if (empty($publicRepos)): ?>
             <p>No public repositories available.</p>
-        <?php else: ?>
-            <ul>
-                <?php foreach ($publicRepos as $repo): ?>
-                    <li class="repo-card">
-                        <a href="files.php?user=<?php echo urlencode($repo['username']); ?>&repo=<?php echo urlencode($repo['name']); ?>">
-                            <?php echo htmlspecialchars($repo['username'] . '/' . $repo['name']); ?>
-                        </a>
-                        <?php if ($repo['description']): ?>
-                            <p class="repo-description">
-                                <?php echo htmlspecialchars($repo['description']); ?>
-                            </p>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
+            <?php else: ?>
+                <div class="grid-container">
+                    <?php foreach ($publicRepos as $repo): ?>
+                        <div class="repo-card">
+                            <a href="files.php?user=<?php echo urlencode($repo['username']); ?>&repo=<?php echo urlencode($repo['name']); ?>">
+                                <?php echo htmlspecialchars($repo['username'] . '/' . $repo['name']); ?>
+                            </a>
+                            <?php if ($repo['description']): ?>
+                                <p class="repo-description">
+                                    <?php echo htmlspecialchars($repo['description']); ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
     </div>
 </body>
 </html>

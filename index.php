@@ -66,10 +66,11 @@ if (isset($_POST['action'])) {
     We don't want this to become GitHub, this is a place for hackers and makers not for large enterprises, there is already great options for that, and we want to build something simple and fun. Features like Organization support, advanced access control, SCRUM-style projects, and a fancy UI will not be added. If a feature is designed for large enterprise and will impact the performance and experience of the platform, it will not be added.
     <h2>I want to sign up!</h2>
     Awesome! As of now it is a private beta but you should totally add your email address to the waiting list below
-    <form method="post">
+    <form class="form-inline" method="post">
         <input type="hidden" name="action" value="signup">
         <input type="email" name="email" placeholder="Email" required>
         <button class="btn-primary" type="submit">Sign Up</button>
     </form>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>
