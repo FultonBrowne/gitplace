@@ -9,6 +9,9 @@ $repo = $_GET['repo'] ?? null;
 $username = $_GET['user'] ?? $_SESSION['username'];
 $issueId = $_GET['issue'] ?? null;
 
+$db = Database::getInstance();
+
+
 if (!$repo) {
     header('Location: dashboard.php');
     exit;
@@ -22,7 +25,6 @@ if (!$repoInfo || !canAccessRepository($repoInfo)) {
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = Database::getInstance();
 
     switch ($_POST['action']) {
         case 'create_issue':
@@ -93,17 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <div class="repository-nav">
-        <h1><?php echo htmlspecialchars($repo); ?></h1>
-        <nav>
-            <a href="files.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Files</a>
-            <a href="commits.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Commits</a>
-            <a href="issues.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>" class="active">Issues</a>
-            <?php if ($_SESSION['user_id'] === $repoInfo['user_id']): ?>
-                <a href="settings.php?<?php echo http_build_query(['repo' => $repo]); ?>">Settings</a>
-            <?php endif; ?>
-        </nav>
-    </div>
+    <?php include 'includes/repo-header.php'; ?>
 
     <?php if ($issueId): // Single issue view
         $db = Database::getInstance();
@@ -200,17 +192,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h3>Create New Issue</h3>
                 <input type="text" name="title" required placeholder="Issue title">
                 <textarea name="description" required placeholder="Issue description"></textarea>
-                <select name="assigned_to">
-                    <option value="">Unassigned</option>
-                    <?php
-                    $users = $db->query('SELECT id, username FROM users ORDER BY username');
-                    while ($user = $users->fetchArray(SQLITE3_ASSOC)) {
-                        echo '<option value="' . $user['id'] . '">' .
-                             htmlspecialchars($user['username']) . '</option>';
-                    }
-                    ?>
-                </select>
-                <button type="submit">Create Issue</button>
+                <input type="hidden" name="assigned_to" value="Unassigned">
+                <button class="btn-primary" type="submit">Create Issue</button>
             </form>
 
             <h3>Issues</h3>

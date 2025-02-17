@@ -43,31 +43,7 @@ if (isset($_POST['action'])) {
     <?php include 'includes/header.php'; ?>
 
     <?php if (!isLoggedIn()): ?>
-        <?php if (isset($error)): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-
-        <div class="auth-forms">
-            <div class="login-form">
-                <h2>Login</h2>
-                <form method="post">
-                    <input type="hidden" name="action" value="login">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
-
-            <div class="register-form">
-                <h2>Register</h2>
-                <form method="post">
-                    <input type="hidden" name="action" value="register">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Register</button>
-                </form>
-            </div>
-        </div>
+        You are not supposed to be here lmao.
     <?php else: ?>
         <div class="repository-list">
             <h1>Your Repositories</h1>

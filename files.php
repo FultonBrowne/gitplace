@@ -3,10 +3,8 @@ require_once 'includes/auth.php';
 require_once 'includes/database.php';
 require_once 'includes/repository.php';
 
-requireLogin();
-
 $repo = $_GET['repo'] ?? null;
-$username = $_GET['user'] ?? $_SESSION['username'];
+$username = $_GET['user'] ?? $_SESSION['username'] ?? null;
 $commit = $_GET['commit'] ?? null;
 $path = $_GET['path'] ?? '';
 
@@ -22,6 +20,7 @@ if (strpos($path, '..') !== false) {
 
 // Get repository info
 $repoInfo = getRepositoryInfo($username, $repo);
+
 if (!$repoInfo || !canAccessRepository($repoInfo)) {
     die("Access denied");
 }
@@ -55,7 +54,7 @@ if (!preg_match('/^[a-f0-9]+$/', $commit)) {
             <a href="commits.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Commits</a>
             <a href="issues.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Issues</a>
             <a href="patches.php?<?php echo http_build_query(['repo' => $repo, 'user' => $username]); ?>">Pull Requests</a>
-            <?php if ($_SESSION['user_id'] === $repoInfo['user_id']): ?>
+            <?php if (isLoggedIn() && $_SESSION['user_id'] === $repoInfo['user_id']): ?>
                 <a href="settings.php?<?php echo http_build_query(['repo' => $repo]); ?>">Settings</a>
             <?php endif; ?>
         </nav>

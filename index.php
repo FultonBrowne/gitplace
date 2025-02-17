@@ -24,6 +24,17 @@ if (isset($_POST['action'])) {
             $error = "Registration failed";
             break;
 
+        case 'signup':
+            $file = fopen('signups.csv', 'a');
+            if ($file) {
+                fputcsv($file, [$_POST['email']]);
+                fclose($file);
+                header('Location: dashboard.php?msg=signedup');
+                exit;
+            }
+            $error = "Signup failed";
+            break;
+
         case 'logout':
             logout();
             header('Location: dashboard.php');
@@ -41,34 +52,24 @@ if (isset($_POST['action'])) {
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <?php if (!isLoggedIn()): ?>
-        <?php if (isset($error)): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
+    <h1>GitPlace</h1>
+    The Simple git host
 
-        <div class="auth-forms">
-            <div class="login-form">
-                <h2>Login</h2>
-                <form method="post">
-                    <input type="hidden" name="action" value="login">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+    Git hosts have become great, with a ton of tools and features and an increasing feature set and focus on enterprise.
 
-            <div class="register-form">
-                <h2>Register</h2>
-                <form method="post">
-                    <input type="hidden" name="action" value="register">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">Register</button>
-                </form>
-            </div>
-        </div>
-    <?php else: ?>
-        <p>You are already logged in. Go to your <a href="dashboard.php">dashboard</a>.</p>
-    <?php endif; ?>
+    Sometimes you dont want all that. you just want to host your repos, have issues, and some simple and fun tools for collaboration. Git place scratches that itch. the interface is dead-simple and it built to use as many built in git tools as possible. With the ultimate goal of being able to use the platform without ever having to open your browser.
+    <h2>What all is done?</h2>
+    This is in a "built in a weekend state" but we have abasic support for issues with comments, patches, public and private repos. You will find bugs and if you do feel free to hop over to the GitPlace Repo on GitPlace.
+    <h2>What will be done?</h2>
+    I want to add some wiki support, better chat interface (that can plugin to IRC), a cli tool, and probably more. While its in the beta state and all these features are being added there WILL be breaking changes, bug, and very probably data loss. We also want to work to make this super self hostable with an easy set up and documentation. We want gitplace to be a tool a communtity and build around.
+    <h2>What won't be done?</h2>
+    We don't want this to become GitHub, this is a place for hackers and makers not for large enterprises, there is already great options for that, and we want to build something simple and fun. Features like Organization support, advanced access control, SCRUM-style projects, and a fancy UI will not be added. If a feature is designed for large enterprise and will impact the performance and experience of the platform, it will not be added.
+    <h2>I want to sign up!</h2>
+    Awesome! As of now it is a private beta but you should totally add your email address to the waiting list below
+    <form method="post">
+        <input type="hidden" name="action" value="signup">
+        <input type="email" name="email" placeholder="Email" required>
+        <button class="btn-primary" type="submit">Sign Up</button>
+    </form>
 </body>
 </html>

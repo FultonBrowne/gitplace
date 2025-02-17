@@ -23,12 +23,9 @@ function canAccessRepository($repoInfo) {
     if (!$repoInfo) return false;
 
     // Allow access if:
-    // 1. User is the owner
-    // 2. Repository is public
-    return isLoggedIn() && (
-        $_SESSION['user_id'] === $repoInfo['user_id'] ||
-        $repoInfo['is_public']
-    );
+    // 1. Repository is public
+    // 2. User is the owner
+    return $repoInfo['is_public'] || (isLoggedIn() && $_SESSION['user_id'] === $repoInfo['user_id']);
 }
 
 function getRepoPath($username, $repoName) {

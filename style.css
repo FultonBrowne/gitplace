@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Judson:wght@400;700&display=swap");
 :root {
     --background: #ffffff; /* White background */
     --surface: #f8f9fa; /* Light grey for surfaces */
@@ -9,7 +8,6 @@
     --light-accent: #66b2ff; /* Lighter blue accent */
     --muted: #6c757d; /* Muted grey text */
     --border: #dee2e6; /* Light grey borders */
-}
 
 * {
     box-sizing: border-box;
@@ -17,7 +15,7 @@
 
 body {
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px; /* Increased padding for better spacing */
     background-color: var(--background);
     color: var(--text);
     font-family: "Inter", sans-serif;
@@ -31,9 +29,9 @@ body {
 .current-view,
 .file-contents {
     background: var(--surface);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
+    padding: 24px; /* Increased padding for better spacing */
+    border-radius: 12px; /* Slightly larger border radius */
+    margin: 24px 0; /* Increased margin for better spacing */
     border: 1px solid var(--border);
 }
 
@@ -44,12 +42,12 @@ ul {
 }
 
 .file-tree ul {
-    padding-left: 20px;
+    padding-left: 24px; /* Increased padding for better spacing */
 }
 
 .file-tree li,
 li {
-    margin-bottom: 10px;
+    margin-bottom: 12px; /* Increased margin for better spacing */
     padding: 4px 0;
 }
 
@@ -57,7 +55,11 @@ li {
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
-    font-size: 13px;
+    font-size: 14px; /* Slightly larger font size */
+}
+
+h1 {
+    font-family: "Judson", serif;
 }
 
 h1,
@@ -67,13 +69,14 @@ h4,
 h5,
 h6 {
     color: var(--highlight);
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Increased margin for better spacing */
+
 }
 
-h1 {
+/* h1 {
     border-bottom: 2px solid var(--accent);
     padding-bottom: 10px;
-}
+} */
 
 a {
     color: var(--accent);
@@ -88,9 +91,9 @@ a:hover {
 
 pre {
     background-color: var(--surface);
-    padding: 15px;
+    padding: 20px; /* Increased padding for better spacing */
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 12px; /* Slightly larger border radius */
     overflow-x: auto;
     font-size: 0.9em;
 }
@@ -109,7 +112,7 @@ ul li a {
 header {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0; /* Increased padding for better spacing */
     border-bottom: 1px solid var(--border);
 }
 .header-spacer {
@@ -119,18 +122,18 @@ header {
 nav {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0; /* Increased padding for better spacing */
 }
 
 nav a {
     color: var(--text);
     text-decoration: none;
-    margin-left: 20px;
+    margin-left: 24px; /* Increased margin for better spacing */
     font-weight: 500;
 }
 
 nav button {
-    margin-left: 20px;
+    margin-left: 24px; /* Increased margin for better spacing */
     font-weight: 500;
 }
 
@@ -151,8 +154,10 @@ nav a:hover {
     ring-offset-color: white; /* ring-offset-white */
     box-shadow: 0 0 0 2px var(--accent); /* focus-visible:ring-2 focus-visible:ring-slate-950 */
     ring-offset-width: 2px; /* focus-visible:ring-offset-2 */
-    background: linear-gradient(to top, var(--accent), var(--light-accent)); /* bg-linear-to-t from-blue-600 to-blue-500 */
-
+    background: linear-gradient(
+        to top,
+        var(--accent),
+        var(--light-accent)
     ); /* bg-linear-to-t from-blue-600 to-blue-500 */
     border: 1px solid #007bff; /* border border-blue-600 */
     color: white; /* text-white */
@@ -177,13 +182,13 @@ nav a:hover {
     opacity: 0.5;
 }
 .section {
-    padding: 60px 0;
+    padding: 64px 0; /* Increased padding for better spacing */
     border-bottom: 1px solid var(--border);
 }
 
 .section h2 {
     color: var(--text);
-    margin-bottom: 20px;
+    margin-bottom: 24px; /* Increased margin for better spacing */
     font-size: 28px;
 }
 
@@ -196,9 +201,9 @@ nav a:hover {
 /* Repository Card Styles */
 .repo-card {
     background: var(--surface);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    padding: 24px; /* Increased padding for better spacing */
+    border-radius: 12px; /* Slightly larger border radius */
+    margin-bottom: 24px; /* Increased margin for better spacing */
     border: 1px solid var(--border);
     transition: box-shadow 0.3s ease;
 }
@@ -221,7 +226,7 @@ nav a:hover {
 
 .repo-description {
     color: var(--muted);
-    margin: 10px 0;
+    margin: 12px 0; /* Increased margin for better spacing */
     font-size: 14px;
 }
 
@@ -237,4 +242,114 @@ nav a:hover {
 
 .repo-visibility.private {
     background-color: #dc3545; /* Red for private repositories */
+}
+/* Text Box Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px; /* Increased padding for better spacing */
+    margin: 8px 0; /* Increased margin for better spacing */
+    border: 1px solid var(--border);
+    border-radius: 8px; /* Slightly larger border radius */
+    background-color: var(--surface);
+    color: var(--text);
+    font-size: 16px;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+    outline: none;
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height for textareas */
+}
+
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition: all 0.3s ease; /* transition-colors */
+    outline: none; /* focus-visible:outline-hidden */
+    ring-offset-color: white; /* ring-offset-white */
+    box-shadow: 0 0 0 2px #dc3545; /* focus-visible:ring-2 focus-visible:ring-slate-950 */
+    ring-offset-width: 2px; /* focus-visible:ring-offset-2 */
+    background: linear-gradient(to top, #dc3545, #ff6b6b); /* bg-linear-to-t from-red-600 to-red-500 */
+    border: 1px solid #dc3545; /* border border-red-600 */
+    color: white; /* text-white */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    height: 1.75rem; /* h-7 */
+    letter-spacing: 0.05em; /* tracking-wide */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.btn-danger:hover {
+    transform: scale(1.01);
+    opacity: 0.9;
+}
+
+.btn-danger:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 2px #dc3545,
+        0 0 0 4px white; /* focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 */
+}
+
+.btn-danger:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0; /* Increased margin for better spacing */
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; /* Slightly larger border radius */
+    overflow: hidden; /* Ensure rounded corners */
+}
+
+th,
+td {
+    padding: 12px 16px; /* Increased padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background-color: var(--light-accent);
+    color: var(--white-text);
+    font-weight: 700;
+}
+
+tr:nth-child(even) {
+    background-color: var(--surface);
+}
+
+
+td {
+    color: var(--text);
+}
+
+caption {
+    caption-side: bottom;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
 }

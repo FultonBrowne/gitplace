@@ -5,6 +5,7 @@
         </div>
         <nav class="main-nav">
             <a href="index.php">Home</a></li>
+            <a href="explore.php">Explore</a>
                 <?php if (isLoggedIn()): ?>
                     <a href="dashboard.php">My Repositories</a>
                     <a href="user_settings.php">Settings</a>
@@ -26,3 +27,11 @@
                 </nav>
             <?php endif; ?>
 </header>
+
+<?php
+    function getBaseURL() {
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'];
+        $path = dirname($_SERVER['PHP_SELF']);
+        return $protocol . '://' . $host . $path;
+    }

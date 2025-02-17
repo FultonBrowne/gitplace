@@ -7,6 +7,8 @@ requireLogin();
 
 $repo = $_GET['repo'] ?? null;
 
+$username = $_SESSION['username'];
+
 if (!$repo) {
     header('Location: dashboard.php');
     exit;
@@ -86,15 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <div class="repository-nav">
-        <h1><?php echo htmlspecialchars($repo); ?></h1>
-        <nav>
-            <a href="files.php?repo=<?php echo urlencode($repo); ?>">Files</a>
-            <a href="commits.php?repo=<?php echo urlencode($repo); ?>">Commits</a>
-            <a href="issues.php?repo=<?php echo urlencode($repo); ?>">Issues</a>
-            <a href="settings.php?repo=<?php echo urlencode($repo); ?>" class="active">Settings</a>
-        </nav>
-    </div>
+    <?php include 'includes/repo-header.php'; ?>
+
 
     <div class="settings-container">
         <?php if (isset($success)): ?>
