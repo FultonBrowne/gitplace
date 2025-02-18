@@ -38,7 +38,7 @@ function listUserRepositories($userId, $username) {
     $stmt = $db->prepare('
         SELECT * FROM repositories
         WHERE user_id = :user_id
-        ORDER BY name
+        ORDER BY created_at DESC
     ');
 
     $stmt->bindValue(':user_id', $userId, SQLITE3_INTEGER);
@@ -66,6 +66,9 @@ function listUserRepositories($userId, $username) {
             $repos[] = ['name' => $file, 'user_id' => $userId, 'is_public' => false];
         }
     }
+
+    //reverse repos array
+    //$repos = array_reverse($repos);
 
     return $repos;
 }

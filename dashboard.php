@@ -47,6 +47,9 @@ if (isset($_POST['action'])) {
     <?php else: ?>
         <div class="repository-list">
             <h1>Your Repositories</h1>
+                <form action="new_repo.php" method="get" style="padding-bottom: 24px;">
+                    <button type="submit" class="btn-primary">New Repository</button>
+                </form>
             <?php
             $userRepos = listUserRepositories($_SESSION['user_id'], $_SESSION['username']);
             if (empty($userRepos)): ?>

@@ -27,14 +27,19 @@ if (!$repoInfo || !canAccessRepository($repoInfo)) {
 
 $repoPath = getRepoPath($username, $repo);
 
-// Get current commit if not specified
-if (!$commit) {
-    $commit = trim(shell_exec("cd " . escapeshellarg($repoPath) . " && git rev-parse HEAD"));
-}
+// Check if the repository has any commits
+$hasCommits = trim(shell_exec("cd " . escapeshellarg($repoPath) . " && git rev-list --count HEAD") || '') > 0;
 
-// Validate commit hash
-if (!preg_match('/^[a-f0-9]+$/', $commit)) {
-    die("Invalid commit hash");
+if ($hasCommits) {
+    // Get current commit if not specified
+    if (!$commit) {
+        $commit = trim(shell_exec("cd " . escapeshellarg($repoPath) . " && git rev-parse HEAD"));
+    }
+
+    // Validate commit hash
+    if (!preg_match('/^[a-f0-9]+$/', $commit)) {
+        die("Invalid commit hash");
+    }
 }
 
 ?>
@@ -48,7 +53,6 @@ if (!preg_match('/^[a-f0-9]+$/', $commit)) {
     <?php include 'includes/header.php'; ?>
 
     <?php include 'includes/repo-header.php'; ?>
-
 
     <div class="file-browser">
         <?php if ($path): ?>
@@ -72,45 +76,49 @@ if (!preg_match('/^[a-f0-9]+$/', $commit)) {
         <?php endif; ?>
 
         <div class="file-list">
-            <?php
-            $cmd = "cd " . escapeshellarg($repoPath) . " && git ls-tree ";
-            if ($path) {
-                $cmd .= escapeshellarg($commit . ":" . $path);
-            } else {
-                $cmd .= escapeshellarg($commit);
-            }
-
-            $tree = shell_exec($cmd);
-            if ($tree) {
-                foreach(explode("\n", trim($tree)) as $line) {
-                    if (preg_match('/^(\d+)\s+(\w+)\s+([a-f0-9]+)\s+(.+)$/', $line, $matches)) {
-                        $type = $matches[2];
-                        $name = $matches[4];
-                        $fullPath = ($path ? $path . '/' : '') . $name;
-
-                        echo "<div class='" . ($type === 'tree' ? 'directory' : 'file') . "'>";
-                        if ($type === 'tree') {
-                            echo "<a href='files.php?" . http_build_query([
-                                'repo' => $repo,
-                                'user' => $username,
-                                'commit' => $commit,
-                                'path' => $fullPath
-                            ]) . "'>" . htmlspecialchars($name) . "/</a>";
-                        } else {
-                            echo "<a href='view.php?" . http_build_query([
-                                'repo' => $repo,
-                                'user' => $username,
-                                'commit' => $commit,
-                                'file' => $fullPath
-                            ]) . "'>" . htmlspecialchars($name) . "</a>";
-                        }
-                        echo "</div>";
-                    }
+            <?php if ($hasCommits): ?>
+                <?php
+                $cmd = "cd " . escapeshellarg($repoPath) . " && git ls-tree ";
+                if ($path) {
+                    $cmd .= escapeshellarg($commit . ":" . $path);
+                } else {
+                    $cmd .= escapeshellarg($commit);
                 }
-            } else {
-                echo "<p>No files found in this directory.</p>";
-            }
-            ?>
+
+                $tree = shell_exec($cmd);
+                if ($tree) {
+                    foreach(explode("\n", trim($tree)) as $line) {
+                        if (preg_match('/^(\d+)\s+(\w+)\s+([a-f0-9]+)\s+(.+)$/', $line, $matches)) {
+                            $type = $matches[2];
+                            $name = $matches[4];
+                            $fullPath = ($path ? $path . '/' : '') . $name;
+
+                            echo "<div class='" . ($type === 'tree' ? 'directory' : 'file') . "'>";
+                            if ($type === 'tree') {
+                                echo "<a href='files.php?" . http_build_query([
+                                    'repo' => $repo,
+                                    'user' => $username,
+                                    'commit' => $commit,
+                                    'path' => $fullPath
+                                ]) . "'>" . htmlspecialchars($name) . "/</a>";
+                            } else {
+                                echo "<a href='view.php?" . http_build_query([
+                                    'repo' => $repo,
+                                    'user' => $username,
+                                    'commit' => $commit,
+                                    'file' => $fullPath
+                                ]) . "'>" . htmlspecialchars($name) . "</a>";
+                            }
+                            echo "</div>";
+                        }
+                    }
+                } else {
+                    echo "<p>No files found in this directory.</p>";
+                }
+                ?>
+            <?php else: ?>
+                <p>This repository has no commits yet.</p>
+            <?php endif; ?>
         </div>
     </div>
 </body>

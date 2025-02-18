@@ -154,25 +154,25 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         <?php endif; ?>
 
         <section class="settings-section">
-            <h2>Git Configuration</h2>
+            <h2>Profile</h2>
             <form method="post" class="settings-form">
                 <input type="hidden" name="action" value="update_git_config">
 
                 <div class="form-group">
-                    <label for="git_email">Git Email</label>
+                    <label for="git_email">Email</label>
                     <input type="email" name="git_email" id="git_email"
                            value="<?php echo htmlspecialchars($user['git_email'] ?? ''); ?>" required>
                     <p class="help-text">
-                        This email will be used for your git commits.
+                        Your accounts email address.
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label for="git_name">Git Name</label>
+                    <label for="git_name">Display Name</label>
                     <input type="text" name="git_name" id="git_name"
                            value="<?php echo htmlspecialchars($user['git_name'] ?? ''); ?>" required>
                     <p class="help-text">
-                        This name will appear in your git commits.
+                        Display name as it will appear on your profile.
                     </p>
                 </div>
 
@@ -251,32 +251,33 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
         </section>
 
         <section class="settings-section">
-                    <h2>Change Password</h2>
-                    <form method="post" class="settings-form">
-                        <input type="hidden" name="action" value="change_password">
+            <h2>Change Password</h2>
+            <form method="post" class="settings-form">
+                <input type="hidden" name="action" value="change_password">
 
-                        <div class="form-group">
-                            <label for="current_password">Current Password</label>
-                            <input type="password" name="current_password" id="current_password" required>
-                        </div>
+                <div class="form-group">
+                    <label for="current_password">Current Password</label>
+                    <input type="password" name="current_password" id="current_password" required>
+                </div>
 
-                        <div class="form-group">
-                            <label for="new_password">New Password</label>
-                            <input type="password" name="new_password" id="new_password" required
-                                   minlength="6">
-                            <p class="help-text">
-                                Must be at least 6 characters long.
-                            </p>
-                        </div>
+                <div class="form-group">
+                    <label for="new_password">New Password</label>
+                    <input type="password" name="new_password" id="new_password" required
+                            minlength="6">
+                    <p class="help-text">
+                        Must be at least 6 characters long.
+                    </p>
+                </div>
 
-                        <div class="form-group">
-                            <label for="confirm_password">Confirm New Password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" required>
-                        </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm New Password</label>
+                    <input type="password" name="confirm_password" id="confirm_password" required>
+                </div>
 
-                        <button type="submit" class="btn-primary">Change Password</button>
-                    </form>
-                </section>
+                <button type="submit" class="btn-primary">Change Password</button>
+            </form>
+        </section>
     </div>
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html>

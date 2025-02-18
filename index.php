@@ -48,12 +48,14 @@ if (isset($_POST['action'])) {
     <meta charset="utf-8">
     <title>GitPlace</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favico.svg" type="image/x-icon" href="favicon.svg" type="image/x-icon">
+
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <h1>GitPlace</h1>
-    The Simple git host
+    <h1 class="maintitle">GitPlace</h1>
+    <div class="subtitle">A Simple git host</div>
 
     Git hosts have become great, with a ton of tools and features and an increasing feature set and focus on enterprise.
 

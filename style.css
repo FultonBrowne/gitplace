@@ -401,6 +401,103 @@ footer {
 
 .form-inline {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
+    gap: 12px;
+}
+
+.commit-history {
+    margin: 24px 0; /* Increased margin for better spacing */
+}
+
+.commit {
+    background: var(--surface);
+    padding: 16px; /* Increased padding for better spacing */
+    border-radius: 8px; /* Slightly larger border radius */
+    margin-bottom: 16px; /* Increased margin for better spacing */
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease;
+}
+
+.commit:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.commit-message {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px; /* Increased margin for better spacing */
+}
+
+.commit-message a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.commit-message a:hover {
+    color: var(--highlight);
+}
+
+.commit-meta {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* File Browser Styles */
+.file-browser {
+    margin: 24px 0; /* Increased margin for better spacing */
+}
+
+.breadcrumbs {
+    margin-bottom: 16px; /* Increased margin for better spacing */
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.breadcrumbs a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: var(--highlight);
+}
+
+.file-list {
+    background: var(--surface);
+    padding: 16px; /* Increased padding for better spacing */
+    border-radius: 8px; /* Slightly larger border radius */
+    border: 1px solid var(--border);
+}
+
+.file-list .directory,
+.file-list .file {
+    margin-bottom: 12px; /* Increased margin for better spacing */
+}
+
+.file-list .directory a,
+.file-list .file a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.file-list .directory a:hover,
+.file-list .file a:hover {
+    color: var(--accent);
+}
+
+.maintitle {
+    margin-bottom: 0px;
+}
+
+.subtitle {
+    font-size: 20px;
+    font-weight: 200;
+    font-family: "Judson", serif;
+    margin-bottom: 24px;
 }

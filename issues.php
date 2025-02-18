@@ -11,7 +11,6 @@ $issueId = $_GET['issue'] ?? null;
 
 $db = Database::getInstance();
 
-
 if (!$repo) {
     header('Location: dashboard.php');
     exit;
@@ -25,24 +24,7 @@ if (!$repoInfo || !canAccessRepository($repoInfo)) {
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     switch ($_POST['action']) {
-        case 'create_issue':
-            $stmt = $db->prepare('
-                INSERT INTO issues (repository_id, title, description, created_by, assigned_to)
-                VALUES (:repo_id, :title, :description, :created_by, :assigned_to)
-            ');
-
-            $stmt->bindValue(':repo_id', $repoInfo['id'], SQLITE3_INTEGER);
-            $stmt->bindValue(':title', $_POST['title'], SQLITE3_TEXT);
-            $stmt->bindValue(':description', $_POST['description'], SQLITE3_TEXT);
-            $stmt->bindValue(':created_by', $_SESSION['user_id'], SQLITE3_INTEGER);
-            $stmt->bindValue(':assigned_to', $_POST['assigned_to'] ?: null, SQLITE3_INTEGER);
-
-            $stmt->execute();
-            header('Location: issues.php?' . http_build_query(['repo' => $repo, 'user' => $username]));
-            exit;
-
         case 'add_comment':
             $stmt = $db->prepare('
                 INSERT INTO issue_comments (issue_id, user_id, comment)
@@ -94,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
-
     <?php include 'includes/repo-header.php'; ?>
 
     <?php if ($issueId): // Single issue view
@@ -187,16 +168,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php else: // Issues list view ?>
         <div class="issues-list">
-            <form method="post" class="create-issue">
-                <input type="hidden" name="action" value="create_issue">
-                <h3>Create New Issue</h3>
-                <input type="text" name="title" required placeholder="Issue title">
-                <textarea name="description" required placeholder="Issue description"></textarea>
-                <input type="hidden" name="assigned_to" value="Unassigned">
-                <button class="btn-primary" type="submit">Create Issue</button>
-            </form>
-
             <h3>Issues</h3>
+            <form action="create_issue.php" method="get">
+                <input type="hidden" name="repo" value="<?php echo htmlspecialchars($repo); ?>">
+                <input type="hidden" name="user" value="<?php echo htmlspecialchars($username); ?>">
+                <button type="submit" class="btn-primary">Create New Issue</button>
+            </form>
             <?php
             $stmt = $db->prepare('
                 SELECT i.*,

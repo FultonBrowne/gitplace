@@ -9,7 +9,7 @@ initDatabase();
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Public Repositories - GitPlace</title>
+    <title>GitPlace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,5 +38,7 @@ initDatabase();
                 </div>
             <?php endif; ?>
     </div>
+    <?php include 'includes/footer.php'; ?>
 </body>
+
 </html>
